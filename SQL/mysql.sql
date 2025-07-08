@@ -31,3 +31,14 @@ CREATE TABLE Questions (
     position INT NOT NULL,
     FOREIGN KEY (quiz_id) REFERENCES Quizzes(id) ON DELETE CASCADE
 );
+
+CREATE TABLE Friends (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    status ENUM('waiting', 'accepted', 'rejected') DEFAULT 'waiting',
+    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE CASCADE,
+    UNIQUE(user_id, friend_id)
+);
