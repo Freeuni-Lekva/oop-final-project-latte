@@ -42,3 +42,22 @@ CREATE TABLE Friends (
     FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE CASCADE,
     UNIQUE(user_id, friend_id)
 );
+
+CREATE TABLE Answers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question_id INT NOT NULL,
+    text TEXT NOT NULL,
+    is_ordered BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (question_id) REFERENCES Questions(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Attempts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    quiz_id INT NOT NULL,
+    score DOUBLE NOT NULL,
+    duration INT NOT NULL,
+    taken TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (quiz_id) REFERENCES Quizzes(id) ON DELETE CASCADE
+);
