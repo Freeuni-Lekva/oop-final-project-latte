@@ -19,7 +19,7 @@ public class QuestionDAO {
             stmt.setInt(1, question.getQuizId());
             stmt.setString(2, question.getQuestionType().toString());
             stmt.setString(3, question.getQuestion());
-            stmt.setString(4, question.getAnswer());
+            stmt.setString(4, question.getPosition());
             stmt.setInt(5, 0);
 
             int affected = stmt.executeUpdate();
@@ -47,7 +47,7 @@ public class QuestionDAO {
             stmt.setInt(1, question.getQuizId());
             stmt.setString(2, question.getQuestionType().toString());
             stmt.setString(3, question.getQuestion());
-            stmt.setString(4, question.getAnswer());
+            stmt.setString(4, question.getPosition());
 
             int rows = stmt.executeUpdate();
             return rows > 0;

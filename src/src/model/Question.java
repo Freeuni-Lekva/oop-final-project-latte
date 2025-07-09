@@ -5,21 +5,21 @@ public class Question {
     private int quizId;
     private QuestionType questionType;
     private String question;
-    private String answer;
+    private String position;
 
-    public Question(int id, int quizId, QuestionType questionType, String question, String answer) {
+    public Question(int id, int quizId, QuestionType questionType, String question, String position) {
         this.id = id;
         this.quizId = quizId;
         this.questionType = questionType;
         this.question = question;
-        this.answer = answer;
+        this.position = position;
     }
 
-    public Question(int quizId, QuestionType questionType, String question, String answer) {
+    public Question(int quizId, QuestionType questionType, String question, String position) {
         this.quizId = quizId;
         this.questionType = questionType;
         this.question = question;
-        this.answer = answer;
+        this.position = position;
     }
 
     public Question() {
@@ -57,12 +57,12 @@ public class Question {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getPosition() {
+        return position;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Question {
                 ", quizId=" + quizId +
                 ", questionType=" + questionType +
                 ", question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
+                ", answer='" + position + '\'' +
                 '}';
     }
 }

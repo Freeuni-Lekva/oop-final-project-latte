@@ -15,7 +15,7 @@ class QuestionTest {
         assertEquals(101, q.getQuizId());
         assertEquals(QuestionType.multiple_choice, q.getQuestionType());
         assertEquals("What is 2+2?", q.getQuestion());
-        assertEquals("4", q.getAnswer());
+        assertEquals("4", q.getPosition());
     }
 
     @Test
@@ -26,7 +26,7 @@ class QuestionTest {
         assertEquals(101, q.getQuizId());
         assertEquals(QuestionType.fill_in_the_blank, q.getQuestionType());
         assertEquals("Univercity name is ___", q.getQuestion());
-        assertEquals("Freeuni", q.getAnswer());
+        assertEquals("Freeuni", q.getPosition());
     }
 
     @Test
@@ -37,13 +37,13 @@ class QuestionTest {
         q.setQuizId(200);
         q.setQuestionType(QuestionType.question_response);
         q.setQuestion("OOP");
-        q.setAnswer("Object Oriented Programming");
+        q.setPosition("Object Oriented Programming");
 
         assertEquals(5, q.getId());
         assertEquals(200, q.getQuizId());
         assertEquals(QuestionType.question_response, q.getQuestionType());
         assertEquals("OOP", q.getQuestion());
-        assertEquals("Object Oriented Programming", q.getAnswer());
+        assertEquals("Object Oriented Programming", q.getPosition());
     }
 
     @Test
