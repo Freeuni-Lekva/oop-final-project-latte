@@ -1,16 +1,16 @@
 package model;
 
 public class Quiz {
-    private String id;
+    private int id;
     private String title;
     private String description;
-    private String creatorId;
+    private int creatorId;
     private boolean isRandomOrdered;
     private boolean isOnePage;
     private boolean isImmediateCorrection;
     private boolean isPractice;
 
-    public Quiz(String id, String title, String description, String creatorId, boolean isRandomOrdered, boolean isOnePage, boolean isImmediateCorrection, boolean isPractice) {
+    public Quiz(int id, String title, String description, int creatorId, boolean isRandomOrdered, boolean isOnePage, boolean isImmediateCorrection, boolean isPractice) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -21,7 +21,7 @@ public class Quiz {
         this.isPractice = isPractice;
     }
 
-    public Quiz(String title, String description, String creatorId, boolean isRandomOrdered, boolean isOnePage, boolean isImmediateCorrection, boolean isPractice) {
+    public Quiz(String title, String description, int creatorId, boolean isRandomOrdered, boolean isOnePage, boolean isImmediateCorrection, boolean isPractice) {
         this.title = title;
         this.description = description;
         this.creatorId = creatorId;
@@ -34,7 +34,7 @@ public class Quiz {
     public Quiz() {
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,11 +54,11 @@ public class Quiz {
         this.description = description;
     }
 
-    public String getCreatorId() {
+    public int getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(String creatorId) {
+    public void setCreatorId(int creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -94,7 +94,7 @@ public class Quiz {
         isPractice = practice;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
