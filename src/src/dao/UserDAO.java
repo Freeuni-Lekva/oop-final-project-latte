@@ -8,11 +8,11 @@ import helpers.connector;
 
 public class UserDAO {
     private static final String FIND_BY_USERNAME_SQL =
-            "SELECT username, id, password_hash, salt, join_date " +
+            "SELECT username, id, password_hash, hash, join_date " +
                     "FROM Users WHERE username = ?";
 
     private static final String INSERT_USER_SQL =
-            "INSERT INTO Users (username, password_hash, salt) VALUES (?, ?, ?)";
+            "INSERT INTO Users (username, password_hash, hash) VALUES (?, ?, ?)";
 
 
     public User findByUsername(String username) {
@@ -25,7 +25,7 @@ public class UserDAO {
                     String userName = rs.getString("username");
                     int id = rs.getInt("id");
                     String hashedPasword = rs.getString("password_hash");
-                    String hash = rs.getString("salt");
+                    String hash = rs.getString("hash");
                     java.sql.Timestamp ts = rs.getTimestamp("join_date");
                     return new User(userName, id, hashedPasword, hash, ts);
                 }
