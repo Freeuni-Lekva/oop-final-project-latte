@@ -44,6 +44,7 @@ CREATE TABLE Friends (
     UNIQUE(user_id, friend_id)
 );
 
+
 CREATE TABLE Answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     question_id INT NOT NULL,
