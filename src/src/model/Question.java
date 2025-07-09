@@ -3,21 +3,21 @@ package model;
 public class Question {
     private int id;
     private int quizId;
-    private String type;
+    private QuestionType questionType;
     private String question;
     private String answer;
 
-    public Question(int id, int quizId, String type, String question, String answer) {
+    public Question(int id, int quizId, QuestionType questionType, String question, String answer) {
         this.id = id;
         this.quizId = quizId;
-        this.type = type;
+        this.questionType = questionType;
         this.question = question;
         this.answer = answer;
     }
 
-    public Question(int quizId, String type, String question, String answer) {
+    public Question(int quizId, QuestionType questionType, String question, String answer) {
         this.quizId = quizId;
-        this.type = type;
+        this.questionType = questionType;
         this.question = question;
         this.answer = answer;
     }
@@ -41,12 +41,12 @@ public class Question {
         this.quizId = quizId;
     }
 
-    public String getType() {
-        return type;
+    public QuestionType getQuestionType() {
+        return questionType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setQuestionType(QuestionType questionType) {
+        this.questionType = questionType;
     }
 
     public String getQuestion() {
@@ -70,7 +70,7 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", quizId=" + quizId +
-                ", type='" + type + '\'' +
+                ", questionType=" + questionType +
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
