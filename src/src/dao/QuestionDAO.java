@@ -58,7 +58,7 @@ public class QuestionDAO {
         }
     }
 
-    public List<Question> getQuestionsByQuizId(int quizId) {
+    public static List<Question> getQuestionsByQuizId(int quizId) {
         List<Question> list = new ArrayList<>();
         String sql = "SELECT * FROM Questions WHERE quiz_id = ?";
 

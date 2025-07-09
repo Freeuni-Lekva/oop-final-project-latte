@@ -38,7 +38,7 @@ public class QuizDAO {
         }
     }
 
-    public Quiz getQuizById(int id) {
+    public static Quiz getQuizById(int id) {
         String sql = "SELECT * FROM Quizzes WHERE id = ?";
         try (Connection conn = connector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
