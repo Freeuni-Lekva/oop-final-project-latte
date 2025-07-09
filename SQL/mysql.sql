@@ -7,7 +7,7 @@ CREATE TABLE Users (
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(256) NOT NULL,
     hash VARCHAR(64) NOT NULL,
-    role ENUM('student', 'teacher') NOT NULL,
+    role ENUM('student', 'admin') NOT NULL,
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE Answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     question_id INT NOT NULL,
     text TEXT NOT NULL,
-    is_ordered BOOLEAN DEFAULT FALSE,
+    is_correct BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (question_id) REFERENCES Questions(id) ON DELETE CASCADE
 );
 
