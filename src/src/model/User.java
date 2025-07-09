@@ -1,15 +1,15 @@
 package model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
-public class user {
+public class User {
     private String username;
     private int id;
     private String HashedPasword;
     private String hash;
     private Timestamp timestamp;
 
-    public user(String username, int id, String hashedPasword, String hash, Timestamp timestamp) {
+    public User(String username, int id, String hashedPasword, String hash, Timestamp timestamp) {
         this.username = username;
         this.id = id;
         this.HashedPasword = hashedPasword;
@@ -17,7 +17,7 @@ public class user {
         this.timestamp = timestamp;
     }
 
-    public user(String hashedPasword, String hash, Timestamp timestamp, String username) {
+    public User(String hashedPasword, String hash, Timestamp timestamp, String username) {
         this.HashedPasword = hashedPasword;
         this.hash = hash;
         this.timestamp = timestamp;
