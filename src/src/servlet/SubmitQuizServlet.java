@@ -21,9 +21,9 @@ public class SubmitQuizServlet extends HttpServlet {
         int correct = 0;
         for (Question q : questions) {
             String userAnswer = request.getParameter("question_" + q.getId());
-            if (userAnswer != null && userAnswer.trim().equalsIgnoreCase(q.getAnswer().trim())) {
+           /* if (userAnswer != null && userAnswer.trim().equalsIgnoreCase(q.getAnswer().trim())) {
                 correct++;
-            }
+            }*/
         }
 
         int total = questions.size();
