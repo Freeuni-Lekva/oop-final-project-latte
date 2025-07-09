@@ -15,7 +15,7 @@ public class UserTest {
 
         assertEquals("testuser", user.getUsername());
         assertEquals(1, user.getId());
-        assertEquals("hashedPass", user.getHashedPasword());
+        assertEquals("hashedPass", user.getHashedPassword());
         assertEquals("saltHash", user.getHash());
         assertEquals(ts, user.getTimestamp());
     }
@@ -26,7 +26,7 @@ public class UserTest {
         User user = new User("hashedPass2", "saltHash2", ts, "user2");
 
         assertEquals("user2", user.getUsername());
-        assertEquals("hashedPass2", user.getHashedPasword());
+        assertEquals("hashedPass2", user.getHashedPassword());
         assertEquals("saltHash2", user.getHash());
         assertEquals(ts, user.getTimestamp());
     }
@@ -37,14 +37,14 @@ public class UserTest {
 
         user.setUsername("updatedUser");
         user.setId(42);
-        user.setHashedPasword("newPass");
+        user.setHashedPassword("newPass");
         user.setHash("newSalt");
         Timestamp newTs = new Timestamp(System.currentTimeMillis());
         user.setTimestamp(newTs);
 
         assertEquals("updatedUser", user.getUsername());
         assertEquals(42, user.getId());
-        assertEquals("newPass", user.getHashedPasword());
+        assertEquals("newPass", user.getHashedPassword());
         assertEquals("newSalt", user.getHash());
         assertEquals(newTs, user.getTimestamp());
     }
