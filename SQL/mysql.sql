@@ -7,6 +7,7 @@ CREATE TABLE Users (
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(256) NOT NULL,
     hash VARCHAR(64) NOT NULL,
+    role ENUM('student', 'teacher') NOT NULL,
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
