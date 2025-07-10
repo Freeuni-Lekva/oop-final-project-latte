@@ -74,3 +74,4 @@ CREATE TABLE Messages (
     FOREIGN KEY (receiver_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (quiz_id) REFERENCES Quizzes(id) ON DELETE SET NULL
 );
+

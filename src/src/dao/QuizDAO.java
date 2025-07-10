@@ -10,7 +10,7 @@ import java.util.List;
 public class QuizDAO {
 
     public boolean createQuiz(Quiz quiz) {
-        String sql = "INSERT INTO Quizzes (title, description, creator_id, is_random, is_one_page, is_immediate_correction, is_practice) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Quizzes (title, description, creator_id, is_random_order, is_one_page, is_immediate_correction, is_practice) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -52,7 +52,7 @@ public class QuizDAO {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getInt("creator_id"),
-                        rs.getBoolean("is_random"),
+                        rs.getBoolean("is_random_order"),
                         rs.getBoolean("is_one_page"),
                         rs.getBoolean("is_immediate_correction"),
                         rs.getBoolean("is_practice")
@@ -64,6 +64,7 @@ public class QuizDAO {
 
         return null;
     }
+
 
     public List<Quiz> getAllQuizzes() {
         List<Quiz> list = new ArrayList<>();
@@ -79,13 +80,14 @@ public class QuizDAO {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getInt("creator_id"),
-                        rs.getBoolean("is_random"),
+                        rs.getBoolean("is_random_order"),
                         rs.getBoolean("is_one_page"),
                         rs.getBoolean("is_immediate_correction"),
                         rs.getBoolean("is_practice")
                 );
                 list.add(quiz);
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
