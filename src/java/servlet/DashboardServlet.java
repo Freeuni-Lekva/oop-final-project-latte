@@ -28,9 +28,13 @@ public class DashboardServlet extends HttpServlet{
         MessagesDao messagesDAO = new MessagesDAO();
         FriendsDAO friendsDAO = new FriendsDAO();
 
-        List<Quiz> popularQuizzes = quizDAO.getPopularQuizzes();
+        List<Quiz> popularQuizzes = quizDao.getPopularQuizzes();
         List<Quiz> recentlyAdded = quizDao.getRecentQuizzes();
 
+        request.setAttribute("popularQuizzes", popularQuizzes);
+        request.setAttribute("recentQuizzes", recentlyAdded);
         request.getRequestDispatcher("dashboard.jsp").forward(request,response);
     }
+
+
 }

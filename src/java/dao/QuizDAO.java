@@ -145,4 +145,33 @@ public class QuizDAO {
 
         return list;
     }
+
+    public List<Quiz> getUserCreatedQuizzes(int id){
+        List<Quiz> list = new ArrayList<>();
+        String sql = "SELECT * FROM Quizzes WHERE id = ? ORDER BY id DESC LIMIT 10";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Quiz quiz = new Quiz(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getInt("creator_id"),
+                            rs.getBoolean("is_random_order"),
+                            rs.getBoolean("is_one_page"),
+                            rs.getBoolean("is_immediate_correction"),
+                            rs.getBoolean("is_practice")
+                    );
+                    list.add(quiz);
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 }
