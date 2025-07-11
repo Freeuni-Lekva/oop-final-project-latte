@@ -13,7 +13,6 @@ INSERT INTO  Users(id, username, password_hash, hash)
 VALUES (1, 'Tini', 'T', 'Tini'),
        (2, 'Luka', 'L', 'Luka'),
        (3, 'Tamari', 'T', 'Tamari');
-
 CREATE TABLE Quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -37,7 +36,6 @@ CREATE TABLE Questions (
     position INT NOT NULL,
     FOREIGN KEY (quiz_id) REFERENCES Quizzes(id) ON DELETE CASCADE
 );
-
 CREATE TABLE Friends (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
