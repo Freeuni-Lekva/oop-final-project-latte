@@ -10,24 +10,50 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/question-response")
-public class QuizQuestionsServlet extends HttpServlet {
+public class QuizQuestionServlet extends HttpServlet {
 
     private final QuestionDAO questionDAO = new QuestionDAO();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int quizId = 1; // Your hardcoded value for now
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-        List<Question> questions = questionDAO.getQuestionsByQuizId(quizId);
-        System.out.println("quizId: " + quizId);
-        System.out.println("Questions found: " + questions.size());
-        for (Question q : questions) {
-            System.out.println("Question ID: " + q.getId() + ", Question: " + q.getQuestion());
+        String quizIdParam = req.getParameter("quizId");
+        if (quizIdParam == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "quizId is required");
+            return;
+        }
+        int quizId;
+        try {
+            quizId = Integer.parseInt(quizIdParam);
+        } catch (NumberFormatException ex) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "quizId must be an integer");
+            return;
         }
 
-        request.setAttribute("questions", questions);
-        request.setAttribute("quizId", quizId);
+        int index = 0;
+        String indexParam = req.getParameter("index");
+        if (indexParam != null) {
+            try {
+                index = Integer.parseInt(indexParam);
+            } catch (NumberFormatException ignore) {
 
-        request.getRequestDispatcher("/auth/question-response.jsp").forward(request, response);
+            }
+        }
+
+        List<Question> all = questionDAO.getQuestionsByQuizId(quizId);
+        if (index < 0 || index >= all.size()) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "No question at that index");
+            return;
+        }
+        Question question = all.get(index);
+
+        req.setAttribute("question", question);
+        req.setAttribute("quizId",  quizId);
+        req.setAttribute("index",   index);
+        req.setAttribute("total",   all.size());
+
+        req.getRequestDispatcher("/auth/question-response.jsp")
+                .forward(req, resp);
     }
 }
