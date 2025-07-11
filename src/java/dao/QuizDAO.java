@@ -65,6 +65,56 @@ public class QuizDAO {
         return null;
     }
 
+    public List<Quiz> getPopularQuizzes(){
+        List<Quiz> popularQuizzes = new ArrayList<>();
+        String sql = "SELECT q.*, COUNT(a.id) as attempt_count FROM Quizzes q LEFT JOIN Attempts a ON q.id = a.quiz_id GROUP BY q.id ORDER BY attempt_count DESC LIMIT 10";
+        try (Connection conn = connector.getConnection();
+             Statement stmt = conn.prepareStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while(rs.next()){
+                popularQuizzes.add(new Quiz(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getInt("creator_id"),
+                        rs.getBoolean("is_random_order"),
+                        rs.getBoolean("is_one_page"),
+                        rs.getBoolean("is_immediate_correction"),
+                        rs.getBoolean("is_practice")
+                ));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return popularQuizzes;
+    }
+
+    public List<Quiz> getRecentQuizzes(){
+        List<Quiz> recentQuizzes = new ArrayList<>();
+        String sql = "SELECT * FROM Quizzes ORDER BY created_at DESC LIMIT 10";
+        try (Connection conn = connector.getConnection();
+             Statement stmt = conn.prepareStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while(rs.next()){
+                recentQuizzes.add(new Quiz(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getInt("creator_id"),
+                        rs.getBoolean("is_random_order"),
+                        rs.getBoolean("is_one_page"),
+                        rs.getBoolean("is_immediate_correction"),
+                        rs.getBoolean("is_practice")
+                ));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recentQuizzes;
+    }
+
 
     public List<Quiz> getAllQuizzes() {
         List<Quiz> list = new ArrayList<>();
