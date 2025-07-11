@@ -51,4 +51,10 @@ public class QuizDAOTest {
         assertNull(user, "User should not be found");
     }
 
+    @Test
+    public void testGetQuizById2() {
+        QuizDao quizDao = new QuizDao();
+        assertNotNull(quizDao.getQuizById(0), "Test should be found");
+    }
+
 }
