@@ -16,11 +16,16 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (!Validator.isValidUsername(username) || !Validator.isValidPassword(password)) {
-            request.setAttribute("error", "Invalid username or password format.");
-            request.getRequestDispatcher("registration.jsp").forward(request, response);
+        if (!Validator.isValidUsername(username) ) {
+            request.setAttribute("error", "Username must be at least 4 characters long and contain only letters, numbers, or underscores.");
+            request.getRequestDispatcher("auth/registration.jsp").forward(request, response);
+            return;
+        }else  if (!Validator.isValidPassword(password)) {
+            request.setAttribute("error", "Password must be at least 6 characters long, contain letters and numbers.");
+            request.getRequestDispatcher("auth/registration.jsp").forward(request, response);
             return;
         }
+
 
         String hash   = PasswordHasher.generateHash();
         String hashed = PasswordHasher.hashPassword(password, hash);
@@ -36,12 +41,12 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("dashboard.jsp");
         } else {
             request.setAttribute("error", "Registration failed. Username might be taken.");
-            request.getRequestDispatcher("registration.jsp").forward(request, response);
+            request.getRequestDispatcher("auth/registration.jsp").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("registration.jsp").forward(request, response);
+        request.getRequestDispatcher("auth/registration.jsp").forward(request, response);
     }
 }
