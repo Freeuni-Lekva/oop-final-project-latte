@@ -1,0 +1,36 @@
+package servlet;
+
+import model.*;
+import dao.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.List;
+
+
+@WebServlet("/dashboard")
+public class DashboardServlet extends HttpServlet{
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getSttribute("user");
+
+        if(user == null){
+            response.sendRedirect("auth/login.jsp");
+            return;
+        }
+
+        QuizDao quizDao = new QuizDAO();
+        MessagesDao messagesDAO = new MessagesDAO();
+        FriendsDAO friendsDAO = new FriendsDAO();
+
+        List<Quiz> popularQuizzes = quizDAO.getPopularQuizzes();
+        List<Quiz> recentlyAdded = quizDao.getRecentQuizzes();
+
+        request.getRequestDispatcher("dashboard.jsp").forward(request,response);
+    }
+}

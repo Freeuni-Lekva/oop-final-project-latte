@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="QuizWebsite:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/QuizWebsite_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="src" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="JUnit4" module-name="src" />
+          <element id="library" level="module" name="JUnit5.8.1" module-name="src" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="src/web/Web" />
+    </root>
+  </artifact>
+</component>
