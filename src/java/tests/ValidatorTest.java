@@ -75,23 +75,23 @@ public class ValidatorTest {
         assertFalse(Validator.isValidPassword(null));
     }
 
-    @Test
-    public void testValidEmail() {
-        assertTrue(Validator.isValidEmail("user@example.com"));
-    }
+//    @Test
+//    public void testValidEmail() {
+//        assertTrue(Validator.isValidEmail("user@example.com"));
+//    }
 
-    @Test
-    public void testEmailWithoutAtSymbol() {
-        assertFalse(Validator.isValidEmail("userexample.com"));
-    }
+//    @Test
+//    public void testEmailWithoutAtSymbol() {
+//        assertFalse(Validator.isValidEmail("userexample.com"));
+//    }
 
-    @Test
-    public void testEmailWithoutDomain() {
-        assertFalse(Validator.isValidEmail("user@"));
-    }
+//    @Test
+//    public void testEmailWithoutDomain() {
+//        assertFalse(Validator.isValidEmail("user@"));
+//    }
 
-    @Test
-    public void testEmailNull() {
-        assertFalse(Validator.isValidEmail(null));
-    }
+//    @Test
+//    public void testEmailNull() {
+//        assertFalse(Validator.isValidEmail(null));
+//    }
 }

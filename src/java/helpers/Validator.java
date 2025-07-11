@@ -14,7 +14,7 @@ public class Validator {
         return isNotEmpty(password) && password.length() >= 6 && password.matches(".*[a-zA-Z].*") && password.matches(".*[0-9].*");
     }
 
-    public static boolean isValidEmail(String email) {
-        return isNotEmpty(email) && email.matches("^\\S+@\\S+\\.\\S+$");
-    }
+//    public static boolean isValidEmail(String email) {
+//        return isNotEmpty(email) && email.matches("^\\S+@\\S+\\.\\S+$");
+//    }
 }

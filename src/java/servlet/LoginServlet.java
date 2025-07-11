@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 
         if (!Validator.isValidUsername(username) || !Validator.isValidPassword(password)) {
             request.setAttribute("error", "Invalid input");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
             return;
         }
 
@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             request.setAttribute("error", "User not found");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
             return;
         }
 
@@ -41,13 +41,13 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("dashboard.jsp");
         } else {
             request.setAttribute("error", "Incorrect password");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("auth/login.jsp");
     }
 }
 
