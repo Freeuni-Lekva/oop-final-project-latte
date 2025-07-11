@@ -25,7 +25,7 @@ CREATE TABLE Quizzes (
     FOREIGN KEY (creator_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 INSERT INTO Quizzes(id, title, description, creator_id, is_random_order, is_one_page, is_immediate_correction, is_practice)
-VALUES (0, 'title1', 'description1', 1, true, true, true, true);
+VALUES (1, 'title1', 'description1', 1, true, true, true, true);
 
 
 CREATE TABLE Questions (
@@ -36,6 +36,8 @@ CREATE TABLE Questions (
     position INT NOT NULL,
     FOREIGN KEY (quiz_id) REFERENCES Quizzes(id) ON DELETE CASCADE
 );
+INSERT INTO Questions(id, quiz_id, type, question, position)
+VALUES (1, 1, 'question_response', 'in which university do you study?', '0');
 CREATE TABLE Friends (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -54,6 +56,8 @@ CREATE TABLE Answers (
     is_ordered BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (question_id) REFERENCES Questions(id) ON DELETE CASCADE
 );
+INSERT INTO Answers(id, question_id, text, is_ordered)
+values (1, 1, 'freeuni', false);
 
 CREATE TABLE Attempts (
     id INT AUTO_INCREMENT PRIMARY KEY,
