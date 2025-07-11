@@ -19,6 +19,12 @@ public class QuizQuestionsServlet extends HttpServlet {
         int quizId = 1; // Your hardcoded value for now
 
         List<Question> questions = questionDAO.getQuestionsByQuizId(quizId);
+        System.out.println("quizId: " + quizId);
+        System.out.println("Questions found: " + questions.size());
+        for (Question q : questions) {
+            System.out.println("Question ID: " + q.getId() + ", Question: " + q.getQuestion());
+        }
+
         request.setAttribute("questions", questions);
         request.setAttribute("quizId", quizId);
 
