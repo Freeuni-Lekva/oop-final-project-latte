@@ -6,17 +6,17 @@
     <title>Dashboard</title>
 </head>
 <body>
-<h2>Welcome to Your Dashboard, ${sessionScope.user.username}</h2>
+<h2>Welcome to Your Dashboard</h2>
 
 <h3>Popular Quizzes</h3>
 <%
-    List<Quiz> popularQuizzes = (List<Quiz>) request.getAttribute("allQuizzes");
+    List<Quiz> popularQuizzes = (List<Quiz>) request.getAttribute("popularQuizzes");
     if (popularQuizzes != null && !popularQuizzes.isEmpty()) {
 %>
 <ul>
     <% for (Quiz quiz : popularQuizzes) { %>
     <li>
-        <strong><%= quiz.getTitle() %></strong><br/>
+        <strong><%= quiz.getTitle() %></strong></a><br/>
         <%= quiz.getDescription() %>
     </li>
     <% } %>
@@ -34,7 +34,7 @@
 <ul>
     <% for (Quiz quiz : recentQuizzes) { %>
     <li>
-        <strong><%= quiz.getTitle() %></strong><br/>
+        <strong><%= quiz.getTitle() %></strong></a><br/>
         <%= quiz.getDescription() %>
     </li>
     <% } %>
