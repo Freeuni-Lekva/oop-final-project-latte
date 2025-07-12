@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="oop-final-project-late:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/oop_final_project_late_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="oop-final-project-late/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="oop-final-project-late" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
