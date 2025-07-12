@@ -43,6 +43,45 @@ public class QuizIntroServlet extends HttpServlet {
 
         request.getRequestDispatcher("auth/quiz-intro.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        String quizIdParam = request.getParameter("quizId");
+        String startFlag = request.getParameter("start");
+
+        if (quizIdParam == null || !"true".equalsIgnoreCase(startFlag)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid start request.");
+            return;
+        }
+
+        int quizId;
+        try {
+            quizId = Integer.parseInt(quizIdParam);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid quiz ID.");
+            return;
+        }
+
+        Quiz quiz = quizDAO.getQuizById(quizId);
+        if (quiz == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Quiz not found.");
+            return;
+        }
+
+        String redirectUrl = request.getContextPath() + "/take-quiz?id=" + quizId;
+
+        if (quiz.isOnePage()) {
+            redirectUrl += "&mode=all";
+        } else {
+            redirectUrl += "&mode=single&index=0";
+        }
+
+        response.sendRedirect(redirectUrl);
+    }
+
+}
 }
 
 

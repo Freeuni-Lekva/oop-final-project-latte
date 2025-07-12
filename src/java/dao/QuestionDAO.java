@@ -62,4 +62,32 @@ public class QuestionDAO {
 
         return list;
     }
+
+    public List<Question> getQuestionsByQuizIdOrdered(int quizId) {
+        List<Question> list = new ArrayList<>();
+        String sql = "SELECT * FROM Questions WHERE quiz_id = ? ORDER BY position ASC";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, quizId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Question q = new Question(
+                        rs.getInt("id"),
+                        rs.getInt("quiz_id"),
+                        QuestionType.valueOf(rs.getString("type")),
+                        rs.getString("question"),
+                        rs.getInt("position")
+                );
+                list.add(q);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }

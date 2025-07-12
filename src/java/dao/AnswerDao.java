@@ -70,5 +70,59 @@ public class AnswerDao {
             preparedStatement.executeUpdate();
         }
     }
+    public boolean isAnswerCorrect(int questionId, String userAnswer) {
+        String sql = "SELECT text FROM Answers WHERE question_id = ?";
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, questionId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("text").equalsIgnoreCase(userAnswer.trim())) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<String> getCorrectAnswersByQuestionId(int questionId) {
+        List<String> correctAnswers = new ArrayList<>();
+        String sql = "SELECT text FROM Answers WHERE question_id = ? ";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, questionId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                correctAnswers.add(rs.getString("text"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return correctAnswers;
+    }
+    public List<String> getCorrectAnswersByQuestionIdOrdered(int questionId) {
+        List<String> correctAnswers = new ArrayList<>();
+        String sql = "SELECT text FROM Answers WHERE question_id = ? ORDER BY position ASC";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, questionId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                correctAnswers.add(rs.getString("text"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return correctAnswers;
+    }
+
 
 }
