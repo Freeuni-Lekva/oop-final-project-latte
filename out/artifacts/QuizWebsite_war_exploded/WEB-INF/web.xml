@@ -7,7 +7,7 @@
 
 
     <welcome-file-list>
-        <welcome-file>auth/question-response.jsp</welcome-file>
+        <welcome-file>auth/registration.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

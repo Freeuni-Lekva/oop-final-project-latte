@@ -69,8 +69,8 @@ public class QuizDAO {
         List<Quiz> popularQuizzes = new ArrayList<>();
         String sql = "SELECT q.*, COUNT(a.id) as attempt_count FROM Quizzes q LEFT JOIN Attempts a ON q.id = a.quiz_id GROUP BY q.id ORDER BY attempt_count DESC LIMIT 10";
         try (Connection conn = connector.getConnection();
-             Statement stmt = conn.prepareStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while(rs.next()){
                 popularQuizzes.add(new Quiz(
@@ -94,8 +94,8 @@ public class QuizDAO {
         List<Quiz> recentQuizzes = new ArrayList<>();
         String sql = "SELECT * FROM Quizzes ORDER BY created_at DESC LIMIT 10";
         try (Connection conn = connector.getConnection();
-             Statement stmt = conn.prepareStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while(rs.next()){
                 recentQuizzes.add(new Quiz(
