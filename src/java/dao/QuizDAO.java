@@ -69,8 +69,8 @@ public class QuizDAO {
         List<Quiz> popularQuizzes = new ArrayList<>();
         String sql = "SELECT q.*, COUNT(a.id) as attempt_count FROM Quizzes q LEFT JOIN Attempts a ON q.id = a.quiz_id GROUP BY q.id ORDER BY attempt_count DESC LIMIT 10";
         try (Connection conn = connector.getConnection();
-             Statement stmt = conn.prepareStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while(rs.next()){
                 popularQuizzes.add(new Quiz(
@@ -94,8 +94,8 @@ public class QuizDAO {
         List<Quiz> recentQuizzes = new ArrayList<>();
         String sql = "SELECT * FROM Quizzes ORDER BY created_at DESC LIMIT 10";
         try (Connection conn = connector.getConnection();
-             Statement stmt = conn.prepareStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while(rs.next()){
                 recentQuizzes.add(new Quiz(
@@ -139,6 +139,35 @@ public class QuizDAO {
             }
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<Quiz> getUserCreatedQuizzes(int id){
+        List<Quiz> list = new ArrayList<>();
+        String sql = "SELECT * FROM Quizzes WHERE id = ? ORDER BY id DESC LIMIT 10";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Quiz quiz = new Quiz(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getInt("creator_id"),
+                            rs.getBoolean("is_random_order"),
+                            rs.getBoolean("is_one_page"),
+                            rs.getBoolean("is_immediate_correction"),
+                            rs.getBoolean("is_practice")
+                    );
+                    list.add(quiz);
+                }
         } catch (SQLException e) {
             e.printStackTrace();
         }

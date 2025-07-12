@@ -27,7 +27,6 @@ public class RegisterServlet extends HttpServlet {
         }
 
         UserDAO dao = new UserDAO();
-        User findUser = dao.findByUsername(username);
 
         String hash   = PasswordHasher.generateHash();
         String hashed = PasswordHasher.hashPassword(password, hash);

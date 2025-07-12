@@ -36,7 +36,7 @@ public class QuestionDAO {
         }
     }
 
-    public List<Question> getQuestionsByQuizId(int quizId) {
+    public static List<Question> getQuestionsByQuizId(int quizId) {
         List<Question> list = new ArrayList<>();
         String sql = "SELECT * FROM Questions WHERE quiz_id = ?";
 
@@ -48,11 +48,11 @@ public class QuestionDAO {
 
             while (rs.next()) {
                 Question q = new Question(
-                        rs.getInt("id"),
-                        rs.getInt("quiz_id"),
-                        QuestionType.valueOf(rs.getString("type")),
-                        rs.getString("question"),
-                        rs.getInt("position")
+                       rs.getInt("id"),
+                       rs.getInt("quiz_id"),
+                       QuestionType.valueOf(rs.getString("type")),
+                       rs.getString("question"),
+                       rs.getInt("position")
                 );
                 list.add(q);
             }

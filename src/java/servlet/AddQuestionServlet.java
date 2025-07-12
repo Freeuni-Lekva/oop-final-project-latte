@@ -25,7 +25,7 @@ public class AddQuestionServlet extends HttpServlet {
         }
 
         String questionText = request.getParameter("question");
-        String answerText = request.getParameter("answer");
+        int position = Integer.parseInt(request.getParameter("position"));
         String typeStr = request.getParameter("type");
 
         QuestionType type;
@@ -37,10 +37,10 @@ public class AddQuestionServlet extends HttpServlet {
             return;
         }
 
-        Question question = new Question(quizId, type, questionText, answerText);
+        Question question = new Question(quizId, type, questionText, 0);
 
         QuestionDAO questionDAO = new QuestionDAO();
-        boolean success = questionDAO.addQuestion(question);
+        boolean success = questionDAO.createQuestion(question);
 
         if (success) {
             request.setAttribute("message", "question added successfully");

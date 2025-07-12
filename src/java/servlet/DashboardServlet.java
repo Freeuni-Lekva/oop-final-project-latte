@@ -17,20 +17,24 @@ public class DashboardServlet extends HttpServlet{
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        User user = (User) session.getSttribute("user");
+        User user = (User) session.getAttribute("user");
 
         if(user == null){
             response.sendRedirect("auth/login.jsp");
             return;
         }
 
-        QuizDao quizDao = new QuizDAO();
-        MessagesDao messagesDAO = new MessagesDAO();
-        FriendsDAO friendsDAO = new FriendsDAO();
+        QuizDAO quizDao = new QuizDAO();
+//        MessagesDao messagesDAO = new MessagesDao();
+//        FriendsDAO friendsDao = new FriendsDao();
 
-        List<Quiz> popularQuizzes = quizDAO.getPopularQuizzes();
+        List<Quiz> popularQuizzes = quizDao.getPopularQuizzes();
         List<Quiz> recentlyAdded = quizDao.getRecentQuizzes();
 
+        request.setAttribute("popularQuizzes", popularQuizzes);
+        request.setAttribute("recentQuizzes", recentlyAdded);
         request.getRequestDispatcher("dashboard.jsp").forward(request,response);
     }
+
+
 }
