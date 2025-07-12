@@ -13,7 +13,7 @@ public class SubmitSingleAnswerServlet extends HttpServlet {
 
         request.setAttribute("isCorrect", isCorrect);
 
-        request.getRequestDispatcher("/take-quiz?id=" + request.getParameter("quizId") + "&mode=single&index=" + request.getParameter("index"))
+        request.getRequestDispatcher("/auth/take-quiz?id=" + request.getParameter("quizId") + "&mode=single&index=" + request.getParameter("index"))
                 .forward(request, response);
     }
 }

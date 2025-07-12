@@ -15,7 +15,7 @@ import java.util.*;
 @WebServlet("/take-quiz")
 public class TakeQuizServlet extends HttpServlet {
     private final QuestionDAO questionDAO = new QuestionDAO();
-    private final AnswerDAO answerDAO = new AnswerDAO();  // DAO to get correct answers
+    private final AnswerDAO answerDAO = new AnswerDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
