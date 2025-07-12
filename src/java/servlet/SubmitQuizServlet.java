@@ -16,20 +16,27 @@ public class SubmitQuizServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int quizId = Integer.parseInt(request.getParameter("quizId"));
-        List<Question> questions = QuestionDAO.getQuestionsByQuizId(quizId);
+        Quiz quiz = quizDAO.getQuizById(quizId);
+        List<Question> questions = new QuestionDAO().getQuestionsByQuizId(quizId);
 
         int correct = 0;
         for (Question q : questions) {
-            String userAnswer = request.getParameter("question_" + q.getId());
-           /* if (userAnswer != null && userAnswer.trim().equalsIgnoreCase(q.getAnswer().trim())) {
-                correct++;
-            }*/
+            String userAnswer = request.getParameter("answer_" + question.getId());
+            List<String> correctAnswers = answerDAO.getCorrectAnswersByQuestionId(question.getId());
+
+            if (userAnswer != null && correctAnswers.contains(userAnswer.trim())) {
+                correctCount++;
+            }
         }
 
-        int total = questions.size();
-        request.setAttribute("score", correct);
-        request.setAttribute("total", total);
+        if (!quiz.isPractice()) {
+            request.setAttribute("quiz", quiz);
+            request.setAttribute("totalQuestions", questions.size());
+            request.setAttribute("correctAnswers", correctCount);
 
-        request.getRequestDispatcher("results.jsp").forward(request, response);
+            request.getRequestDispatcher("/auth/quiz-result.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+        }
     }
 }
